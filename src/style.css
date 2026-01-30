@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+
+
+:root {
+  @apply bg-zinc-800 text-gray-100;
+}
+
+input {
+  @apply bg-zinc-700 text-gray-100 rounded-md p-2;
+}
