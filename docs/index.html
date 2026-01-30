@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Release My Tickets by Web Presence</title>
+    <script type="module" crossorigin src="/assets/main-CbDKm_3M.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-DjSesIUB.css">
+  </head>
+  <body>
+    <div class="max-w-7xl mx-auto flex flex-col gap-2 py-6" x-data="ticketForm()">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-2xl font-bold">Release My Tickets</h1>
+          <p class="text-sm text-zinc-400">Web Presence</p>
+        </div>
+        <div>
+          <a class="flex items-center gap-2 text-blue-500" href="https://docs.google.com/spreadsheets/d/10rB-1Fm1uqatYKmj5yt2D7Q1l2TmShGbImjW4eJcRNg/edit?usp=sharing" target="_blank" class="text-blue-500">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+            </svg>
+            Google Sheet
+          </a>
+        </div>
+      </div>
+
+      <div class="my-4">
+        <input
+          type="text"
+          class="form-input rounded-md"
+          placeholder="Name"
+          x-model="owner"
+        />
+      </div>
+
+      <table class="table-auto w-full border-collapse border border-zinc-700">
+        <thead>
+          <tr class="bg-zinc-700 p-2">
+            <th class="text-left p-2">Ticket URL</th>
+            <th class="text-left p-2">Ticket details</th>
+            <th class="text-left p-2">Service</th>
+            <th class="text-left p-2">Who will verify?</th>
+            <th class="text-left p-2">Monitor link</th>
+            <th class="text-left p-2"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <template x-for="(ticket, index) in tickets" :key="ticket.id">
+            <tr class="border-b border-zinc-700">
+              <td class="p-2">
+                <input type="text" class="form-input rounded-md w-full" placeholder="Ticket URL" x-model="ticket.url" data-ticket-url />
+              </td>
+              <td class="p-2">
+                <input type="text" class="form-input rounded-md w-full" placeholder="Ticket details" x-model="ticket.details" />
+              </td>
+              <td class="p-2">
+                <input type="text" class="form-input rounded-md w-full" placeholder="Service" x-model="ticket.service" />
+              </td>
+              <td class="p-2">
+                <input type="text" class="form-input rounded-md w-full" placeholder="Who will verify?" x-model="ticket.verifier" />
+              </td>
+              <td class="p-2">
+                <input type="text" class="form-input rounded-md w-full" placeholder="Monitor link" x-model="ticket.monitor" />
+              </td>
+              <td class="p-2">
+                <button
+                  type="button"
+                  class="bg-red-500 text-white px-4 py-2 rounded-md cursor-pointer"
+                  @click="removeTicket(index)"
+                  aria-label="Delete ticket"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                    <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          </template>
+        </tbody>
+
+        <tfoot>
+          <tr>
+            <td colspan="6" class="py-2 text-right p-2">
+              <button
+                type="button"
+                class="bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer"
+                @click="addTicket()"
+              >
+                Add Ticket
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="6" class="py-2 p-2">
+              <button
+                type="button"
+                class="bg-blue-500 text-white px-4 py-2 rounded-md w-full"
+                @click="submit()"
+                :disabled="isSubmitting"
+                :class="isSubmitting ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'"
+                x-text="isSubmitting ? 'Submitting...' : 'Submit to Google Sheets'"
+              >
+              </button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    
+
+  </body>
+</html>

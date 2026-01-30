@@ -5,4 +5,14 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
   ],
+  build: {
+    outDir: 'docs',
+    assetsDir: 'assets',
+    manifest: true,
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+      },
+    },
+  }
 })
